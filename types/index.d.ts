@@ -59,7 +59,7 @@ declare type AddNotesFormProps = {
 
 // ====== USER PARAMS
 declare type CreateNotesParams = {
-  clerkId: string;
+  //clerkId: string;
   title: string;
   content: string;
 };

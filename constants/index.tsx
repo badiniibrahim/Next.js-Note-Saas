@@ -7,7 +7,7 @@ export const navLinks = [
 
   {
     label: "Add note",
-    route: "/note",
+    route: "/notes",
     icon: "/assets/icons/filter.svg",
   },
 
@@ -29,10 +29,10 @@ export const plans = [
     name: "Free",
     icon: "/assets/icons/free-plan.svg",
     price: 0,
-    credits: 20,
+    credits: 2,
     inclusions: [
       {
-        label: "20 Free Credits",
+        label: "2 Free Credits",
         isIncluded: true,
       },
       {
