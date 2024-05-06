@@ -6,9 +6,9 @@ export const Collection = ({ noteList }: { noteList: Notes[] }) => {
   return (
     <>
       {noteList.length > 0 ? (
-        <ul className="collection-list">
-          {noteList.map((image) => (
-            <Card note={image} key={image._id} />
+        <ul className="grid grid-rows-4 grid-flow-col gap-4">
+          {noteList.map((note) => (
+            <Card note={note} key={note._id} />
           ))}
         </ul>
       ) : (
@@ -24,13 +24,11 @@ const Card = ({ note }: { note: Notes }) => {
   return (
     <li>
       <Link href={``} className="collection-card">
-        <div
-          key={note._id}
-          className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
-        >
-          <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
+        <div key={note._id} className="grid items-start">
           <div className="space-y-1">
-            <p className="text-sm font-medium leading-none">{note.title}</p>
+            <p className="text-sm font-medium leading-none text-black uppercase mb-5">
+              {note.title}
+            </p>
             <p className="text-sm text-muted-foreground">{note.content}</p>
           </div>
         </div>
