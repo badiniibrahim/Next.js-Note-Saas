@@ -11,6 +11,7 @@ const Profile = async () => {
   if (!userId) redirect("/sign-in");
 
   const user = await getUserById(userId);
+  console.log("Profile : ", user);
 
   return (
     <>

@@ -11,10 +11,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Textarea } from "../ui/textarea";
 import { handleError } from "@/lib/utils";
-import { createNote } from "@/lib/action/note.actions";
 import { updateCredits } from "@/lib/action/user.actions";
 import { InsufficientCreditsModal } from "./InsufficientCreditsModal";
 import { creditFee } from "@/constants";
+import { createNote } from "@/lib/action/note.actions";
 
 const AddNotesForme = ({ userId, creditBalance }: AddNotesFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,7 +27,7 @@ const AddNotesForme = ({ userId, creditBalance }: AddNotesFormProps) => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
-
+    console.log({ creditBalance });
     try {
       const todo = {
         title: values.title,
@@ -49,41 +49,39 @@ const AddNotesForme = ({ userId, creditBalance }: AddNotesFormProps) => {
   }
 
   return (
-    <div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          {creditBalance < Math.abs(creditFee) && <InsufficientCreditsModal />}
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        {creditBalance < Math.abs(creditFee) && <InsufficientCreditsModal />}
 
-          <CustomField
-            control={form.control}
-            name="title"
-            formLabel="Title"
-            className="w-full"
-            render={({ field }) => <Input {...field} className="input-field" />}
-          />
+        <CustomField
+          control={form.control}
+          name="title"
+          formLabel="Title"
+          className="w-full"
+          render={({ field }) => <Input {...field} className="input-field" />}
+        />
 
-          <CustomField
-            control={form.control}
-            name="content"
-            formLabel="Content"
-            className="w-full"
-            render={({ field }) => (
-              <Textarea {...field} className="input-field" />
-            )}
-          />
+        <CustomField
+          control={form.control}
+          name="content"
+          formLabel="Content"
+          className="w-full"
+          render={({ field }) => (
+            <Textarea {...field} className="input-field" />
+          )}
+        />
 
-          <div className="flex flex-col gap-4">
-            <Button
-              type="submit"
-              className="submit-button capitalize"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Submitting..." : "Add new note"}
-            </Button>
-          </div>
-        </form>
-      </Form>
-    </div>
+        <div className="flex flex-col gap-4">
+          <Button
+            type="submit"
+            className="submit-button capitalize"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Submitting..." : "Add new note"}
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 };
 
